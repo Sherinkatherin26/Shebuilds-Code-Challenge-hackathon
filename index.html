@@ -299,6 +299,44 @@
       letter-spacing: 0.05em;
     }
 
+    /* Centered grid of 17 SDG icons */
+    .sdg-center {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 1.5rem 0 2.5rem;
+    }
+
+    .sdg-grid {
+      display: grid;
+      grid-template-columns: repeat(6, 56px);
+      gap: 12px 18px;
+      justify-content: center;
+      align-items: center;
+      width: min(720px, 100%);
+    }
+
+    .sdg-grid img {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      object-fit: cover;
+      box-shadow: 0 4px 12px rgba(2,6,23,0.45);
+      transition: transform 180ms ease, box-shadow 180ms ease;
+      background: #fff;
+      padding: 6px;
+    }
+
+    .sdg-grid img:hover {
+      transform: translateY(-6px) scale(1.04);
+      box-shadow: 0 10px 24px rgba(2,6,23,0.6);
+    }
+
+    @media (max-width: 640px) {
+      .sdg-grid { grid-template-columns: repeat(4, 48px); gap: 10px; }
+      .sdg-grid img { width: 48px; height: 48px; padding: 4px; }
+    }
+
     /* Carousel wrapper - handles fade edges */
     .carousel-wrapper {
       position: relative;
@@ -2694,9 +2732,31 @@
   <section id="themes-carousel" class="themes-section">
     <div class="container">
       <p class="section-label">Themes</p>
-      <h2 class="section-title">Round 1 Themes</h2>
-      <p class="section-tagline">17 Global Goals. Infinite Ideas.</p>
-      <p class="section-desc" style="margin-inline: auto; max-width: 800px; margin-bottom: 3rem;">Your solution must address one of the United Nations 17 Sustainable Development Goals. Pick the one that moves you most.</p>
+      <h2 class="section-title">17 Global Goals</h2>
+      <p class="section-desc" style="margin-inline: auto; max-width: 800px; margin-bottom: 1.5rem;">Your solution must address one of the United Nations 17 Sustainable Development Goals. Pick the one that moves you most.</p>
+
+      <!-- Centered 17 SDG icons -->
+      <div class="sdg-center" aria-hidden="false">
+        <div class="sdg-grid">
+          <img src="images/sdg01.png" alt="SDG 1" />
+          <img src="images/sdg02.png" alt="SDG 2" />
+          <img src="images/sdg03.png" alt="SDG 3" />
+          <img src="images/sdg04.png" alt="SDG 4" />
+          <img src="images/sdg05.png" alt="SDG 5" />
+          <img src="images/sdg06.png" alt="SDG 6" />
+          <img src="images/sdg07.png" alt="SDG 7" />
+          <img src="images/sdg08.png" alt="SDG 8" />
+          <img src="images/sdg09.png" alt="SDG 9" />
+          <img src="images/sdg10.png" alt="SDG 10" />
+          <img src="images/sdg11.png" alt="SDG 11" />
+          <img src="images/sdg12.png" alt="SDG 12" />
+          <img src="images/sdg13.png" alt="SDG 13" />
+          <img src="images/sdg14.png" alt="SDG 14" />
+          <img src="images/sdg15.png" alt="SDG 15" />
+          <img src="images/sdg16.png" alt="SDG 16" />
+          <img src="images/sdg17.png" alt="SDG 17" />
+        </div>
+      </div>
 
       <!-- Infinite Scroll Carousel Wrapper -->
       <div class="carousel-wrapper">
