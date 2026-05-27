@@ -272,6 +272,11 @@
       98% { opacity: 0; left: 120%; }
     }
 
+    @keyframes beltScroll {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
     .navbar,
     section,
     footer {
@@ -1293,12 +1298,49 @@
     }
 
     .sdg-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      display: flex;
       gap: 1rem;
       margin-top: 2rem;
-      max-width: 1200px;
-      margin-inline: auto;
+      overflow: hidden;
+      padding: 1rem 0;
+      position: relative;
+      width: 100%;
+      max-width: 100%;
+    }
+
+    .sdg-grid::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 60px;
+      background: linear-gradient(90deg, var(--bg-deep) 0%, transparent 100%);
+      z-index: 10;
+      pointer-events: none;
+    }
+
+    .sdg-grid::after {
+      content: '';
+      position: absolute;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      width: 60px;
+      background: linear-gradient(90deg, transparent 0%, var(--bg-deep) 100%);
+      z-index: 10;
+      pointer-events: none;
+    }
+
+    .sdg-belt-wrapper {
+      display: flex;
+      gap: 1rem;
+      animation: beltScroll 40s linear infinite;
+      width: fit-content;
+    }
+
+    .sdg-belt-wrapper:hover {
+      animation-play-state: paused;
     }
 
     .sdg-card {
@@ -1311,17 +1353,12 @@
       overflow: hidden;
       backdrop-filter: blur(18px);
       box-shadow: 0 20px 70px rgba(8, 4, 22, 0.35);
-      transition: transform 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease, opacity 0.45s ease;
+      transition: transform 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
       min-height: 260px;
       text-align: left;
-      opacity: 0;
-      transform: translateY(18px);
-      will-change: opacity, transform;
-    }
-
-    .sdg-card.in-view {
-      opacity: 1;
-      transform: translateY(0);
+      min-width: 220px;
+      flex-shrink: 0;
+      will-change: transform;
     }
 
     .sdg-card:hover {
@@ -2394,8 +2431,9 @@
       <h2 class="section-title">Our Themes</h2>
       <p class="section-desc" style="margin-inline: auto; max-width: 760px;">A curated set of impact themes for Code &amp; Challenge 1.0, shown as animated topic cards with image placeholders and hover reveal details.</p>
       <div class="sdg-grid">
-        <article class="sdg-card float-slow">
-          <div class="sdg-image" style="background-image: linear-gradient(180deg, rgba(26,18,52,0.18), rgba(10,7,23,0.92));">
+        <div class="sdg-belt-wrapper">
+          <article class="sdg-card float-slow">
+            <div class="sdg-image" style="background-image: linear-gradient(180deg, rgba(26,18,52,0.18), rgba(10,7,23,0.92));">
             <div class="sdg-image-overlay">
               <span class="sdg-image-title">SDG 01</span>
               <span class="sdg-image-subtitle">No Poverty</span>
@@ -2632,6 +2670,7 @@
             <p>Strengthen global partnerships for sustainable development.</p>
           </div>
         </article>
+        </div>
       </div>
     </div>
   </section>
