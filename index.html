@@ -277,6 +277,258 @@
       100% { transform: translateX(-50%); }
     }
 
+    /* ═══════════════════════════════════════════════════════════════ */
+    /* Themes Section - Infinite Horizontal Carousel (Right to Left)   */
+    /* ═══════════════════════════════════════════════════════════════ */
+
+    .themes-section {
+      position: relative;
+      z-index: 1;
+      padding: 4.5rem 0;
+      background: linear-gradient(180deg, rgba(3, 0, 20, 0.4), rgba(3, 0, 20, 0.6));
+      border-top: 1px solid rgba(124, 58, 237, 0.15);
+      border-bottom: 1px solid rgba(124, 58, 237, 0.15);
+      overflow: hidden;
+    }
+
+    .themes-section .section-tagline {
+      font-size: clamp(1.2rem, 3vw, 1.5rem);
+      color: var(--pink-accent);
+      font-weight: 600;
+      margin-bottom: 1rem;
+      letter-spacing: 0.05em;
+    }
+
+    /* Carousel wrapper - handles fade edges */
+    .carousel-wrapper {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+      padding: 2rem 0;
+    }
+
+    /* Fade edge overlays */
+    .carousel-fade {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 120px;
+      z-index: 10;
+      pointer-events: none;
+    }
+
+    .carousel-fade-left {
+      left: 0;
+      background: linear-gradient(90deg, var(--bg-deep) 0%, transparent 100%);
+    }
+
+    .carousel-fade-right {
+      right: 0;
+      background: linear-gradient(90deg, transparent 0%, var(--bg-deep) 100%);
+    }
+
+    /* Main carousel track - infinite scroll animation */
+    .carousel-track {
+      display: flex;
+      gap: 1.5rem;
+      width: fit-content;
+      animation: carouselScroll 50s linear infinite;
+      will-change: transform;
+    }
+
+    /* Infinite scroll animation - moves right to left */
+    @keyframes carouselScroll {
+      0% {
+        transform: translateX(0);
+      }
+      100% {
+        transform: translateX(-50%);
+      }
+    }
+
+    /* Pause animation on hover */
+    .carousel-wrapper:hover .carousel-track {
+      animation-play-state: paused;
+    }
+
+    /* ───────────────────────────────────────────────────────────── */
+    /* Theme card styling */
+    /* ───────────────────────────────────────────────────────────── */
+
+    .theme-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      min-width: 200px;
+      flex-shrink: 0;
+      padding: 2rem 1.5rem;
+      background: rgba(16, 12, 34, 0.6);
+      border: 1.5px solid rgba(168, 85, 247, 0.25);
+      border-radius: 20px;
+      backdrop-filter: blur(12px);
+      transition: 
+        transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+        border-color 0.3s ease,
+        box-shadow 0.3s ease,
+        background 0.3s ease;
+      box-shadow: 
+        0 8px 32px rgba(8, 4, 22, 0.25),
+        inset 0 1px 0 rgba(255, 255, 255, 0.08);
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Glow effect on card hover */
+    .theme-card::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -50%;
+      width: 200px;
+      height: 200px;
+      background: radial-gradient(circle, rgba(168, 85, 247, 0.15), transparent 70%);
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .theme-card:hover {
+      transform: translateY(-8px) scale(1.05);
+      border-color: rgba(240, 171, 252, 0.5);
+      background: rgba(20, 15, 40, 0.8);
+      box-shadow:
+        0 16px 48px rgba(124, 58, 237, 0.35),
+        inset 0 1px 0 rgba(240, 171, 252, 0.15);
+    }
+
+    .theme-card:hover::before {
+      opacity: 1;
+    }
+
+    /* Theme icon (emoji) */
+    .theme-icon {
+      font-size: 3.5rem;
+      margin-bottom: 1rem;
+      display: block;
+      transition: transform 0.3s ease;
+    }
+
+    .theme-card:hover .theme-icon {
+      transform: scale(1.15) rotate(5deg);
+    }
+
+    /* Theme label (e.g., "SDG 1") */
+    .theme-label {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--pink-accent);
+      margin-bottom: 0.75rem;
+      opacity: 0.8;
+    }
+
+    /* Theme name (heading) */
+    .theme-name {
+      font-family: var(--font-heading);
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin: 0 0 0.5rem 0;
+      line-height: 1.3;
+    }
+
+    /* Theme description */
+    .theme-description {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin: 0;
+      line-height: 1.4;
+      opacity: 0.85;
+      transition: opacity 0.3s ease;
+    }
+
+    .theme-card:hover .theme-description {
+      opacity: 1;
+      color: var(--text-primary);
+    }
+
+    /* ───────────────────────────────────────────────────────────── */
+    /* Responsive behavior */
+    /* ───────────────────────────────────────────────────────────── */
+
+    @media (max-width: 768px) {
+      .themes-section {
+        padding: 3rem 0;
+      }
+
+      .theme-card {
+        min-width: 160px;
+        padding: 1.5rem 1rem;
+        border-radius: 16px;
+      }
+
+      .theme-icon {
+        font-size: 2.5rem;
+        margin-bottom: 0.75rem;
+      }
+
+      .theme-name {
+        font-size: 0.95rem;
+      }
+
+      .theme-description {
+        font-size: 0.75rem;
+      }
+
+      .carousel-fade {
+        width: 80px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .themes-section {
+        padding: 2.5rem 0;
+      }
+
+      .carousel-wrapper {
+        padding: 1rem 0;
+      }
+
+      .carousel-track {
+        gap: 1rem;
+      }
+
+      .theme-card {
+        min-width: 140px;
+        padding: 1.25rem 0.75rem;
+      }
+
+      .theme-icon {
+        font-size: 2rem;
+        margin-bottom: 0.5rem;
+      }
+
+      .theme-name {
+        font-size: 0.85rem;
+      }
+
+      .theme-description {
+        font-size: 0.7rem;
+      }
+
+      .carousel-fade {
+        width: 60px;
+      }
+
+      .themes-section .section-tagline {
+        font-size: 1.1rem;
+      }
+    }
+
     .navbar,
     section,
     footer {
@@ -2424,8 +2676,236 @@
     </div>
   </section>
 
-  <!-- Themes -->
-  <section id="domains" class="theme-section">
+  <!-- Themes Section - Infinite Horizontal Carousel (Right to Left) -->
+  <section id="themes-carousel" class="themes-section">
+    <div class="container">
+      <p class="section-label">Themes</p>
+      <h2 class="section-title">Round 1 Themes</h2>
+      <p class="section-tagline">17 Global Goals. Infinite Ideas.</p>
+      <p class="section-desc" style="margin-inline: auto; max-width: 800px; margin-bottom: 3rem;">Your solution must address one of the United Nations 17 Sustainable Development Goals. Pick the one that moves you most.</p>
+
+      <!-- Infinite Scroll Carousel Wrapper -->
+      <div class="carousel-wrapper">
+        <!-- Fade edges for smooth entry/exit -->
+        <div class="carousel-fade carousel-fade-left"></div>
+        <div class="carousel-fade carousel-fade-right"></div>
+
+        <!-- Main carousel track with infinite scrolling -->
+        <div class="carousel-track">
+          <!-- First set of theme cards -->
+          <div class="theme-card">
+            <div class="theme-icon">🌍</div>
+            <div class="theme-label">SDG 1</div>
+            <h3 class="theme-name">No Poverty</h3>
+            <p class="theme-description">End poverty in all its forms everywhere</p>
+          </div>
+          <div class="theme-card">
+            <div class="theme-icon">🍎</div>
+            <div class="theme-label">SDG 2</div>
+            <h3 class="theme-name">Zero Hunger</h3>
+            <p class="theme-description">End hunger, improve nutrition, promote agriculture</p>
+          </div>
+          <div class="theme-card">
+            <div class="theme-icon">⚕️</div>
+            <div class="theme-label">SDG 3</div>
+            <h3 class="theme-name">Good Health</h3>
+            <p class="theme-description">Ensure healthy lives and well-being for all</p>
+          </div>
+          <div class="theme-card">
+            <div class="theme-icon">📚</div>
+            <div class="theme-label">SDG 4</div>
+            <h3 class="theme-name">Quality Education</h3>
+            <p class="theme-description">Ensure inclusive, equitable education</p>
+          </div>
+          <div class="theme-card">
+            <div class="theme-icon">♀️</div>
+            <div class="theme-label">SDG 5</div>
+            <h3 class="theme-name">Gender Equality</h3>
+            <p class="theme-description">Empower all women and girls</p>
+          </div>
+          <div class="theme-card">
+            <div class="theme-icon">💧</div>
+            <div class="theme-label">SDG 6</div>
+            <h3 class="theme-name">Clean Water</h3>
+            <p class="theme-description">Ensure sustainable water and sanitation</p>
+          </div>
+          <div class="theme-card">
+            <div class="theme-icon">⚡</div>
+            <div class="theme-label">SDG 7</div>
+            <h3 class="theme-name">Clean Energy</h3>
+            <p class="theme-description">Ensure access to affordable, sustainable energy</p>
+          </div>
+          <div class="theme-card">
+            <div class="theme-icon">💼</div>
+            <div class="theme-label">SDG 8</div>
+            <h3 class="theme-name">Decent Work</h3>
+            <p class="theme-description">Promote inclusive growth and decent employment</p>
+          </div>
+          <div class="theme-card">
+            <div class="theme-icon">🏭</div>
+            <div class="theme-label">SDG 9</div>
+            <h3 class="theme-name">Industry & Innovation</h3>
+            <p class="theme-description">Build resilient infrastructure and foster innovation</p>
+          </div>
+          <div class="theme-card">
+            <div class="theme-icon">📊</div>
+            <div class="theme-label">SDG 10</div>
+            <h3 class="theme-name">Reduced Inequalities</h3>
+            <p class="theme-description">Reduce inequality within and among countries</p>
+          </div>
+          <div class="theme-card">
+            <div class="theme-icon">🏙️</div>
+            <div class="theme-label">SDG 11</div>
+            <h3 class="theme-name">Sustainable Cities</h3>
+            <p class="theme-description">Create inclusive, safe, resilient communities</p>
+          </div>
+          <div class="theme-card">
+            <div class="theme-icon">♻️</div>
+            <div class="theme-label">SDG 12</div>
+            <h3 class="theme-name">Responsible Consumption</h3>
+            <p class="theme-description">Ensure sustainable consumption patterns</p>
+          </div>
+          <div class="theme-card">
+            <div class="theme-icon">🌱</div>
+            <div class="theme-label">SDG 13</div>
+            <h3 class="theme-name">Climate Action</h3>
+            <p class="theme-description">Take urgent action to combat climate change</p>
+          </div>
+          <div class="theme-card">
+            <div class="theme-icon">🌊</div>
+            <div class="theme-label">SDG 14</div>
+            <h3 class="theme-name">Life Below Water</h3>
+            <p class="theme-description">Conserve oceans, seas, and marine resources</p>
+          </div>
+          <div class="theme-card">
+            <div class="theme-icon">🌳</div>
+            <div class="theme-label">SDG 15</div>
+            <h3 class="theme-name">Life on Land</h3>
+            <p class="theme-description">Protect ecosystems, forests, and biodiversity</p>
+          </div>
+          <div class="theme-card">
+            <div class="theme-icon">⚖️</div>
+            <div class="theme-label">SDG 16</div>
+            <h3 class="theme-name">Peace & Justice</h3>
+            <p class="theme-description">Promote peaceful societies and justice</p>
+          </div>
+          <div class="theme-card">
+            <div class="theme-icon">🤝</div>
+            <div class="theme-label">SDG 17</div>
+            <h3 class="theme-name">Partnerships</h3>
+            <p class="theme-description">Strengthen global partnerships for development</p>
+          </div>
+
+          <!-- Second set of theme cards (duplicate for seamless loop) -->
+          <div class="theme-card">
+            <div class="theme-icon">🌍</div>
+            <div class="theme-label">SDG 1</div>
+            <h3 class="theme-name">No Poverty</h3>
+            <p class="theme-description">End poverty in all its forms everywhere</p>
+          </div>
+          <div class="theme-card">
+            <div class="theme-icon">🍎</div>
+            <div class="theme-label">SDG 2</div>
+            <h3 class="theme-name">Zero Hunger</h3>
+            <p class="theme-description">End hunger, improve nutrition, promote agriculture</p>
+          </div>
+          <div class="theme-card">
+            <div class="theme-icon">⚕️</div>
+            <div class="theme-label">SDG 3</div>
+            <h3 class="theme-name">Good Health</h3>
+            <p class="theme-description">Ensure healthy lives and well-being for all</p>
+          </div>
+          <div class="theme-card">
+            <div class="theme-icon">📚</div>
+            <div class="theme-label">SDG 4</div>
+            <h3 class="theme-name">Quality Education</h3>
+            <p class="theme-description">Ensure inclusive, equitable education</p>
+          </div>
+          <div class="theme-card">
+            <div class="theme-icon">♀️</div>
+            <div class="theme-label">SDG 5</div>
+            <h3 class="theme-name">Gender Equality</h3>
+            <p class="theme-description">Empower all women and girls</p>
+          </div>
+          <div class="theme-card">
+            <div class="theme-icon">💧</div>
+            <div class="theme-label">SDG 6</div>
+            <h3 class="theme-name">Clean Water</h3>
+            <p class="theme-description">Ensure sustainable water and sanitation</p>
+          </div>
+          <div class="theme-card">
+            <div class="theme-icon">⚡</div>
+            <div class="theme-label">SDG 7</div>
+            <h3 class="theme-name">Clean Energy</h3>
+            <p class="theme-description">Ensure access to affordable, sustainable energy</p>
+          </div>
+          <div class="theme-card">
+            <div class="theme-icon">💼</div>
+            <div class="theme-label">SDG 8</div>
+            <h3 class="theme-name">Decent Work</h3>
+            <p class="theme-description">Promote inclusive growth and decent employment</p>
+          </div>
+          <div class="theme-card">
+            <div class="theme-icon">🏭</div>
+            <div class="theme-label">SDG 9</div>
+            <h3 class="theme-name">Industry & Innovation</h3>
+            <p class="theme-description">Build resilient infrastructure and foster innovation</p>
+          </div>
+          <div class="theme-card">
+            <div class="theme-icon">📊</div>
+            <div class="theme-label">SDG 10</div>
+            <h3 class="theme-name">Reduced Inequalities</h3>
+            <p class="theme-description">Reduce inequality within and among countries</p>
+          </div>
+          <div class="theme-card">
+            <div class="theme-icon">🏙️</div>
+            <div class="theme-label">SDG 11</div>
+            <h3 class="theme-name">Sustainable Cities</h3>
+            <p class="theme-description">Create inclusive, safe, resilient communities</p>
+          </div>
+          <div class="theme-card">
+            <div class="theme-icon">♻️</div>
+            <div class="theme-label">SDG 12</div>
+            <h3 class="theme-name">Responsible Consumption</h3>
+            <p class="theme-description">Ensure sustainable consumption patterns</p>
+          </div>
+          <div class="theme-card">
+            <div class="theme-icon">🌱</div>
+            <div class="theme-label">SDG 13</div>
+            <h3 class="theme-name">Climate Action</h3>
+            <p class="theme-description">Take urgent action to combat climate change</p>
+          </div>
+          <div class="theme-card">
+            <div class="theme-icon">🌊</div>
+            <div class="theme-label">SDG 14</div>
+            <h3 class="theme-name">Life Below Water</h3>
+            <p class="theme-description">Conserve oceans, seas, and marine resources</p>
+          </div>
+          <div class="theme-card">
+            <div class="theme-icon">🌳</div>
+            <div class="theme-label">SDG 15</div>
+            <h3 class="theme-name">Life on Land</h3>
+            <p class="theme-description">Protect ecosystems, forests, and biodiversity</p>
+          </div>
+          <div class="theme-card">
+            <div class="theme-icon">⚖️</div>
+            <div class="theme-label">SDG 16</div>
+            <h3 class="theme-name">Peace & Justice</h3>
+            <p class="theme-description">Promote peaceful societies and justice</p>
+          </div>
+          <div class="theme-card">
+            <div class="theme-icon">🤝</div>
+            <div class="theme-label">SDG 17</div>
+            <h3 class="theme-name">Partnerships</h3>
+            <p class="theme-description">Strengthen global partnerships for development</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Old Themes Section (keeping for reference) -->
+  <section id="domains" class="theme-section" style="display: none;">
     <div class="container">
       <p class="section-label">Themes</p>
       <h2 class="section-title">Our Themes</h2>
