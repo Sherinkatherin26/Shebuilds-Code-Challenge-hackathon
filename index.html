@@ -331,7 +331,10 @@
     .carousel-track {
       display: flex;
       gap: 1.5rem;
-      width: fit-content;
+      align-items: center;
+      /* Ensure the track is at least twice the visible container width so
+         translateX(-50%) moves a full set of cards and loops seamlessly */
+      min-width: 200%;
       animation: carouselScroll 50s linear infinite;
       will-change: transform;
     }
